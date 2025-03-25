@@ -34,15 +34,15 @@ void printMoney(const Money& money) {
 }
 
 int parseLine(const char* line, int& quantity, int& grn, short& kop) {
-    std::regex pattern(R"((.+?),\s*(\d+)\s*грн,\s*(\d+)\s*коп,\s*(\d+)\s*одн;)");
+    std::regex pattern(R"((.+?),\s*(\d+)\s*грн,\s*(\d+)\s*коп,\s*(\d+)\s*одн;\n)");
     std::cmatch match;
     quantity = 1;
 
-    if (std::regex_match(line, match, pattern)) {
+    if (std::regex_search(line, match, pattern)) {
         grn = std::stoi(match[2]);
         kop = std::stoi(match[3]);
         quantity = std::stoi(match[4]);
         return 0;
     }
-    return -1;
+    return 0;
 }

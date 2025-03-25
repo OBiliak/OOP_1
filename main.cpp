@@ -11,8 +11,8 @@ int main() {
     Money total = {0, 0};
     char line[256];
     while (fgets(line, sizeof(line), file)) {
-        int quantity, grn;
-        short kop;
+        int quantity, grn=0;
+        short kop=0;
         
         if (parseLine(line, quantity, grn, kop) == 0) {
             Money price = {grn, kop};
