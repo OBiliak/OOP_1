@@ -1,13 +1,16 @@
-
 #include <iostream>
+#include <cstdio>
+#include <regex>
+#include <cstring>
+#include <string>
 
 struct Money {
     int grn;
     short int kop;
 };
 
-void addMoney(const Money& a, const Money& b, Money& result);
-void multiplyMoney(const Money& a, int multiplier, Money& result);
+void addMoney(Money& a, Money& b);
+void multiplyMoney(Money& a, int multiplier);
 void roundMoney(Money& money);
 void printMoney(const Money& money);
-int parseLine(const char* line, int& quantity, int& grn, short int& kop);
+void parseLine(const char* line, int& quantity, Money& money);

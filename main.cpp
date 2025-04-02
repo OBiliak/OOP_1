@@ -1,7 +1,9 @@
-#include <iostream>
 #include "methods.cpp"
+#include <Windows.h>
+#include <cstdio>
 
 int main() {
+    SetConsoleOutputCP(CP_UTF8);
     FILE *file = fopen("C:\\Users\\ASUS\\Desktop\\GROSHA\\price.txt", "r");
     if (file == NULL){
         perror("Error opening file");
@@ -11,18 +13,11 @@ int main() {
     Money total = {0, 0};
     char line[256];
     while (fgets(line, sizeof(line), file)) {
-        int quantity, grn=0;
-        short kop=0;
-        
-        if (parseLine(line, quantity, grn, kop) == 0) {
-            Money price = {grn, kop};
-            Money multipliedPrice;
-            multiplyMoney(price, quantity, multipliedPrice);
-            
-            Money newTotal;
-            addMoney(total, multipliedPrice, newTotal);
-            total = newTotal;
-        }
+        Money price = {0, 0};
+        int quantity = 1;
+        parseLine(line, quantity, price);
+        multiplyMoney(price, quantity);
+        addMoney(total, price);
     }
 
     std::cout << "До заокруглення: ";
